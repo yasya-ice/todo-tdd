@@ -54,7 +54,7 @@ describe(endpointUrl, () => {
       .get(endpointUrl + "671748f0b38e9d70b0adc25a");
       expect(response.statusCode).toBe(404);
   })
-  
+
   it("PUT " + endpointUrl, async () => {
     console.log(endpointUrl + newTodoId)
     
@@ -71,5 +71,17 @@ describe(endpointUrl, () => {
       .put(endpointUrl + notExistingTodoId)
       .send(testData);
       expect(res.statusCode).toBe(404);
+  })
+  it("DELETE" + endpointUrl, async () => {
+    console.log(endpointUrl + newTodoId)
+    const res = await request(app)
+      .delete(endpointUrl + newTodoId)  
+    expect(res.statusCode).toBe(200)
+  })
+
+  it("DELETE todo id doesn't exist" + endpointUrl + ":todoId", async () => {
+    const response = await request(app)
+      .delete(endpointUrl + "671748f0b38e9d70b0adc25a");
+      expect(response.statusCode).toBe(404);
   })
 })
